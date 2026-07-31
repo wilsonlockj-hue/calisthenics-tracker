@@ -480,6 +480,8 @@ const [elapsed,setElapsed]=useState(0);
 
 const [currentExercise,setCurrentExercise]=useState(0);
 
+const [selectedExercise,setSelectedExercise] = useState(0);
+
 const [completedSets,setCompletedSets]=useState<string[]>([]);
 
 
@@ -615,27 +617,55 @@ setCurrentExercise(0);
 
 function completeSet(id:string,rest:number){
 
-
 if(completedSets.includes(id))
 return;
 
 
-const updated=[
+const updatedSets=[
 ...completedSets,
 id
 ];
 
 
-setCompletedSets(updated);
+setCompletedSets(updatedSets);
 
 
 setRestTimer(rest);
-
 setRestPaused(false);
 
 
 
+const exerciseIndex =
+Number(id.split("-")[0]);
+
+
+
+const exercise =
+workout.exercises[exerciseIndex];
+
+
+
+const completedCount =
+updatedSets.filter(
+(set)=>set.startsWith(`${exerciseIndex}-`)
+).length;
+
+
+
+if(
+completedCount >= exercise.sets &&
+exerciseIndex < workout.exercises.length - 1
+){
+
+setSelectedExercise(exerciseIndex + 1);
+
+setCurrentExercise(exerciseIndex + 1);
+
 }
+
+
+}
+
 
 
 
@@ -785,10 +815,8 @@ const workout=workouts[selectedDay];
 
 const progress =
 Math.round(
-(currentExercise/workout.exercises.length)*100
+(selectedExercise/workout.exercises.length)*100
 );
-
-
 
 
 
@@ -825,7 +853,6 @@ onClick={finishWorkout}
 
 
 
-
 <div className="timer-card workout-timer">
 
 
@@ -845,11 +872,153 @@ Workout Time
 
 
 
+<div className="current-exercise-card">
+
+<h2>
+Current Exercise
+</h2>
 
 
+<h1>
+{workout.exercises[selectedExercise].name}
+</h1>
+
+
+<p>
+{workout.exercises[selectedExercise].sets} × {workout.exercises[selectedExercise].reps}
+</p>
+
+
+
+<div className="current-sets">
 
 {
-restTimer > 0 &&
+Array.from({
+length: workout.exercises[selectedExercise].sets
+}).map((_,set)=>{
+
+const id=`${selectedExercise}-${set}`;
+
+const done =
+completedSets.includes(id);
+
+
+return (
+
+<button
+
+key={id}
+
+className={`current-set ${
+done ? "done" : ""
+}`}
+
+onClick={()=>{
+
+
+if(done){
+
+setCompletedSets(
+completedSets.filter(
+(item)=>item!==id
+)
+);
+
+}
+
+else{
+
+completeSet(
+id,
+workout.exercises[selectedExercise].rest
+);
+
+}
+
+
+}}
+
+>
+
+{
+done
+?
+<CheckCircle/>
+:
+set+1
+}
+
+
+<span>
+Set {set+1}
+</span>
+
+
+</button>
+
+
+)
+
+})
+
+}
+
+</div>
+
+
+<div className="exercise-navigation">
+
+
+<button
+
+className="nav-button"
+
+disabled={selectedExercise===0}
+
+onClick={()=>{
+
+setSelectedExercise(
+selectedExercise - 1
+);
+
+}}
+
+>
+
+← Back
+
+</button>
+
+
+
+<button
+
+className="nav-button"
+
+disabled={
+selectedExercise === workout.exercises.length - 1
+}
+
+onClick={()=>{
+
+setSelectedExercise(
+selectedExercise + 1
+);
+
+}}
+
+>
+
+Next →
+
+</button>
+
+
+</div>
+
+
+</div>
+
 
 <div className="timer-card rest-timer">
 
@@ -868,6 +1037,16 @@ Rest Timer
 
 
 <div className="timer-controls">
+
+<button
+
+onClick={()=>setRestTimer(90)}
+
+>
+
+Start 90s
+
+</button>
 
 
 <button
@@ -940,7 +1119,6 @@ Skip Rest
 </div>
 
 
-}
 
 
 
@@ -977,6 +1155,10 @@ Exercise {currentExercise+1} / {workout.exercises.length}
 
 <section className="exercise-list">
 
+<h2 className="section-title">
+All Exercises
+</h2>
+
 
 
 {
@@ -984,7 +1166,7 @@ Exercise {currentExercise+1} / {workout.exercises.length}
 workout.exercises.map((item,index)=>{
 
 
-const active=index===currentExercise;
+const active=index===selectedExercise;
 
 
 return (
@@ -998,8 +1180,9 @@ className={`exercise-card ${
 active ? "active" : ""
 }`}
 
->
+onClick={()=>setSelectedExercise(index)}
 
+>
 
 {
 active &&
@@ -1052,7 +1235,6 @@ completedSets.includes(id);
 
 return (
 
-
 <button
 
 key={id}
@@ -1065,20 +1247,22 @@ done ? "set-done" : ""
 onClick={()=>{
 
 
+if(done){
+
+setCompletedSets(
+completedSets.filter(
+(item)=>item!==id
+)
+);
+
+}
+
+else{
+
 completeSet(
 id,
 item.rest
 );
-
-
-
-if(
-set===item.sets-1
-&&
-index<workout.exercises.length-1
-){
-
-setCurrentExercise(index+1);
 
 }
 
@@ -1086,7 +1270,6 @@ setCurrentExercise(index+1);
 }}
 
 >
-
 
 {
 done ?
@@ -1099,9 +1282,7 @@ done ?
 
 }
 
-
 </button>
-
 
 )
 
