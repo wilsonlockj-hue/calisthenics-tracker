@@ -1241,3 +1241,12 @@ letter-spacing:1px;
 
 }
 
+.workout-header {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.current-exercise-card {
+  margin-top: 10px;
+}
+

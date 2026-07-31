@@ -574,21 +574,26 @@ return `${minutes
 
 function startWorkout(){
 
+  setStarted(true);
 
-setStarted(true);
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant"
+    });
+  }, 0);
 
-setStartTime(Date.now());
+  setStartTime(Date.now());
 
-setElapsed(0);
+  setElapsed(0);
 
-setCurrentExercise(0);
+  setCurrentExercise(0);
 
-setCompletedSets([]);
+  setCompletedSets([]);
 
-setRestTimer(0);
+  setRestTimer(0);
 
 }
-
 
 
 
