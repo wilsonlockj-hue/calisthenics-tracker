@@ -1,0 +1,706 @@
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0f1115;
+  color: #f5f5f5;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+
+#root {
+  min-height: 100vh;
+}
+
+
+
+/* =========================
+   APP CONTAINER
+========================= */
+
+.app {
+
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+
+}
+
+
+
+/* =========================
+   HOME SCREEN
+========================= */
+
+.home-header {
+
+  text-align: center;
+  margin-bottom: 30px;
+
+}
+
+
+.home-header h1 {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 28px;
+  margin-bottom: 8px;
+
+}
+
+
+.home-header p {
+
+  color: #9ca3af;
+  margin: 0;
+
+}
+
+
+
+
+.preview-list {
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+
+
+.preview-card {
+
+  background: #181b22;
+
+  border: 2px solid transparent;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  transition:
+    transform .2s,
+    border .2s,
+    background .2s;
+
+}
+
+
+.preview-card:hover {
+
+  transform: translateY(-2px);
+
+}
+
+
+
+.preview-card.selected {
+
+  border-color: #7c3aed;
+
+  background:
+  linear-gradient(
+    145deg,
+    #22194a,
+    #181b22
+  );
+
+}
+
+
+
+.preview-card h2 {
+
+  margin: 0 0 5px;
+
+}
+
+
+
+.preview-card h3 {
+
+  margin: 0 0 10px;
+
+  color: #c4b5fd;
+
+}
+
+
+
+.preview-card p {
+
+  color:#9ca3af;
+
+}
+
+
+
+.preview-card ul {
+
+  padding-left: 20px;
+
+  color:#d1d5db;
+
+}
+
+
+
+
+
+.start-button,
+.finish-button {
+
+  width:100%;
+
+  margin-top:25px;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  border:none;
+
+  background:#7c3aed;
+
+  color:white;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  transition:.2s;
+
+}
+
+
+.start-button:hover,
+.finish-button:hover {
+
+  background:#8b5cf6;
+
+  transform:translateY(-2px);
+
+}
+
+
+
+
+/* =========================
+   WORKOUT HEADER
+========================= */
+
+
+.workout-header {
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+}
+
+
+
+.workout-header h1 {
+
+  text-align:center;
+
+  margin:5px 0;
+
+}
+
+
+
+
+.back-button {
+
+  align-self:flex-start;
+
+  border:none;
+
+  background:#181b22;
+
+  color:white;
+
+  padding:10px;
+
+  border-radius:12px;
+
+}
+
+
+
+
+/* =========================
+   TIMERS
+========================= */
+
+
+.timer-card {
+
+
+  border-radius:20px;
+
+  padding:22px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:10px;
+
+}
+
+
+.timer-card svg {
+
+  width:28px;
+
+  height:28px;
+
+}
+
+
+
+.timer-card span {
+
+  font-size:14px;
+
+  opacity:.8;
+
+}
+
+
+
+.timer-card strong {
+
+  font-size:38px;
+
+  letter-spacing:2px;
+
+}
+
+
+
+.workout-timer {
+
+  background:
+
+  linear-gradient(
+    135deg,
+    #1e293b,
+    #111827
+  );
+
+  border:2px solid #334155;
+
+}
+
+
+
+.rest-timer {
+
+
+  background:
+
+  linear-gradient(
+    135deg,
+    #7c2d12,
+    #431407
+  );
+
+
+  border:2px solid #fb923c;
+
+
+}
+
+
+
+.timer-controls {
+
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+
+
+.timer-controls button,
+.skip-button {
+
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:10px 15px;
+
+  background:#ffffff22;
+
+  color:white;
+
+  font-weight:600;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
+
+}
+
+
+
+.skip-button {
+
+  margin-top:12px;
+
+}
+/* =========================
+   PROGRESS BAR
+========================= */
+
+
+.progress {
+
+  height:10px;
+
+  background:#27272a;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  margin-top:15px;
+
+}
+
+
+
+.progress div {
+
+  height:100%;
+
+  background:#7c3aed;
+
+  transition:.3s;
+
+}
+
+
+
+
+
+.workout-header > p {
+
+  text-align:center;
+
+  color:#9ca3af;
+
+  margin:0;
+
+}
+
+
+
+
+
+/* =========================
+   EXERCISES
+========================= */
+
+
+.exercise-list {
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:16px;
+
+}
+
+
+
+.exercise-card {
+
+
+  position:relative;
+
+  background:#181b22;
+
+  border-radius:20px;
+
+  padding:20px;
+
+  border:2px solid transparent;
+
+  transition:.25s;
+
+
+}
+
+
+
+
+.exercise-card.active {
+
+
+  background:
+
+  linear-gradient(
+    145deg,
+    #25184d,
+    #181b22
+  );
+
+
+  border-color:#8b5cf6;
+
+
+  box-shadow:
+
+  0 0 25px
+
+  rgba(
+    124,
+    58,
+    237,
+    .35
+  );
+
+
+}
+
+
+
+
+.current-tag {
+
+
+  position:absolute;
+
+  top:12px;
+
+  right:15px;
+
+  background:#7c3aed;
+
+  padding:5px 10px;
+
+  border-radius:20px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+
+
+.exercise-card h2 {
+
+
+  margin:0 0 10px;
+
+  font-size:20px;
+
+
+}
+
+
+
+.exercise-card p {
+
+
+  margin:0 0 18px;
+
+  color:#a1a1aa;
+
+
+}
+
+
+
+/* =========================
+   SET BUTTONS
+========================= */
+
+
+.sets {
+
+
+  display:flex;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+
+}
+
+
+
+.sets button {
+
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:50%;
+
+  border:2px solid #52525b;
+
+  background:#111827;
+
+  color:white;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-weight:700;
+
+
+}
+
+
+
+.sets button:hover {
+
+
+  border-color:#8b5cf6;
+
+
+}
+
+
+
+.sets button.set-done {
+
+
+  background:#22c55e;
+
+  border-color:#22c55e;
+
+
+}
+
+
+
+
+
+/* =========================
+   FINISH
+========================= */
+
+
+.finish-button {
+
+
+  margin-bottom:40px;
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:480px){
+
+
+.app {
+
+  padding:15px;
+
+}
+
+
+
+.home-header h1 {
+
+  font-size:24px;
+
+}
+
+
+
+.timer-card strong {
+
+  font-size:32px;
+
+}
+
+
+
+.exercise-card {
+
+  padding:17px;
+
+}
+
+
+
+.exercise-card h2 {
+
+  font-size:18px;
+
+}
+
+
+}
+
+
+
+
