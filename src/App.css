@@ -1,168 +1,112 @@
-/* =========================
-   GLOBAL
-========================= */
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #0f1115;
-  color: #f5f5f5;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-}
-
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-
-#root {
-  min-height: 100vh;
-}
-
-
-
-/* =========================
-   APP CONTAINER
-========================= */
-
 .app {
 
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
+max-width:600px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+
+/* ================= HOME ================= */
+
+
+.home-page {
+
+min-height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+
+.home-page h1 {
+
+text-align:center;
+
+font-size:30px;
+
+}
+
+
+.home-page h2 {
+
+font-size:20px;
 
 }
 
 
 
-/* =========================
-   HOME SCREEN
-========================= */
+.workout-buttons {
 
-.home-header {
+display:flex;
 
-  text-align: center;
-  margin-bottom: 30px;
+flex-direction:column;
 
-}
-
-
-.home-header h1 {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  font-size: 28px;
-  margin-bottom: 8px;
-
-}
-
-
-.home-header p {
-
-  color: #9ca3af;
-  margin: 0;
+gap:15px;
 
 }
 
 
 
+.workout-card {
 
-.preview-list {
+background:#181b22;
 
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+color:white;
 
-}
+border-radius:20px;
 
+padding:22px;
 
+text-align:left;
 
-.preview-card {
+display:flex;
 
-  background: #181b22;
+flex-direction:column;
 
-  border: 2px solid transparent;
+gap:8px;
 
-  border-radius: 18px;
-
-  padding: 20px;
-
-  transition:
-    transform .2s,
-    border .2s,
-    background .2s;
-
-}
-
-
-.preview-card:hover {
-
-  transform: translateY(-2px);
+border:none;
 
 }
 
 
 
-.preview-card.selected {
+.workout-card strong {
 
-  border-color: #7c3aed;
-
-  background:
-  linear-gradient(
-    145deg,
-    #22194a,
-    #181b22
-  );
+font-size:20px;
 
 }
 
 
 
-.preview-card h2 {
+.workout-card span {
 
-  margin: 0 0 5px;
-
-}
-
-
-
-.preview-card h3 {
-
-  margin: 0 0 10px;
-
-  color: #c4b5fd;
+opacity:.7;
 
 }
 
 
 
-.preview-card p {
+.history-button {
 
-  color:#9ca3af;
+background:#181b22;
 
-}
+color:white;
 
+padding:16px;
 
+border-radius:16px;
 
-.preview-card ul {
+font-size:16px;
 
-  padding-left: 20px;
-
-  color:#d1d5db;
+border:none;
 
 }
 
@@ -170,141 +114,139 @@ button {
 
 
 
-.start-button,
-.finish-button {
+/* ================= WORKOUT ================= */
 
-  width:100%;
 
-  margin-top:25px;
+.workout-page {
 
-  padding:18px;
+max-width:600px;
 
-  border-radius:16px;
+margin:auto;
 
-  border:none;
+padding:20px;
 
-  background:#7c3aed;
+display:flex;
 
-  color:white;
+flex-direction:column;
 
-  font-size:18px;
-
-  font-weight:700;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:10px;
-
-  transition:.2s;
+gap:18px;
 
 }
-
-
-.start-button:hover,
-.finish-button:hover {
-
-  background:#8b5cf6;
-
-  transform:translateY(-2px);
-
-}
-
-
-
-
-/* =========================
-   WORKOUT HEADER
-========================= */
-
-
-.workout-header {
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:15px;
-
-  margin-bottom:20px;
-
-}
-
-
-
-.workout-header h1 {
-
-  text-align:center;
-
-  margin:5px 0;
-
-}
-
 
 
 
 .back-button {
 
-  align-self:flex-start;
+align-self:flex-start;
 
-  border:none;
+background:#181b22;
 
-  background:#181b22;
+color:white;
 
-  color:white;
+padding:10px 16px;
 
-  padding:10px;
+border-radius:14px;
 
-  border-radius:12px;
+border:none;
+
+}
+
+
+
+.workout-page h1 {
+
+text-align:center;
+
+font-size:26px;
 
 }
 
 
 
 
-/* =========================
-   TIMERS
-========================= */
+/* ================= WORKOUT CONTROLS ================= */
+
+
+.workout-controls {
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+margin-bottom:10px;
+
+}
+
+
+
+.workout-controls button {
+
+width:100%;
+
+}
+
+
+
+.finish-button {
+
+background:#2ecc71;
+
+color:white;
+
+padding:16px;
+
+border-radius:16px;
+
+font-size:18px;
+
+font-weight:bold;
+
+border:none;
+
+}
+
+
+
+.all-exercises-button {
+
+background:#252932;
+
+color:white;
+
+padding:15px;
+
+border-radius:16px;
+
+border:none;
+
+}
+
+
+
+
+
+/* ================= TIMERS ================= */
 
 
 .timer-card {
 
+background:#181b22;
 
-  border-radius:20px;
+border-radius:20px;
 
-  padding:22px;
+padding:18px;
 
-  display:flex;
+display:flex;
 
-  flex-direction:column;
+align-items:center;
 
-  align-items:center;
+justify-content:center;
 
-  gap:8px;
+flex-direction:column;
 
-  margin-top:10px;
-
-}
-
-
-.timer-card svg {
-
-  width:28px;
-
-  height:28px;
-
-}
-
-
-
-.timer-card span {
-
-  font-size:14px;
-
-  opacity:.8;
+gap:8px;
 
 }
 
@@ -312,9 +254,7 @@ button {
 
 .timer-card strong {
 
-  font-size:38px;
-
-  letter-spacing:2px;
+font-size:28px;
 
 }
 
@@ -322,845 +262,592 @@ button {
 
 .workout-timer {
 
-  background:
+background:#16324a;
 
-  linear-gradient(
-    135deg,
-    #1e293b,
-    #111827
-  );
-
-  border:2px solid #334155;
+border:1px solid #3498db;
 
 }
-
 
 
 .rest-timer {
 
+background:#2b1f3a;
 
-  background:
-
-  linear-gradient(
-    135deg,
-    #7c2d12,
-    #431407
-  );
-
-
-  border:2px solid #fb923c;
-
-
-}
-
-
-
-.timer-controls {
-
-
-  display:flex;
-
-  gap:10px;
-
-  margin-top:15px;
-
-}
-
-
-
-.timer-controls button,
-.skip-button {
-
-
-  border:none;
-
-  border-radius:12px;
-
-  padding:10px 15px;
-
-  background:#ffffff22;
-
-  color:white;
-
-  font-weight:600;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:5px;
-
-}
-
-
-
-.skip-button {
-
-  margin-top:12px;
-
-}
-/* =========================
-   PROGRESS BAR
-========================= */
-
-
-.progress {
-
-  height:10px;
-
-  background:#27272a;
-
-  border-radius:20px;
-
-  overflow:hidden;
-
-  margin-top:15px;
-
-}
-
-
-
-.progress div {
-
-  height:100%;
-
-  background:#7c3aed;
-
-  transition:.3s;
-
+border:1px solid #8b5cf6;
 }
 
 
 
 
 
-.workout-header > p {
-
-  text-align:center;
-
-  color:#9ca3af;
-
-  margin:0;
-
-}
-
-
-
-
-
-/* =========================
-   EXERCISES
-========================= */
-
-
-.exercise-list {
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:16px;
-
-}
-
-
-
-.exercise-card {
-
-
-  position:relative;
-
-  background:#181b22;
-
-  border-radius:20px;
-
-  padding:20px;
-
-  border:2px solid transparent;
-
-  transition:.25s;
-
-
-}
-
-
-
-
-.exercise-card.active {
-
-
-  background:
-
-  linear-gradient(
-    145deg,
-    #25184d,
-    #181b22
-  );
-
-
-  border-color:#8b5cf6;
-
-
-  box-shadow:
-
-  0 0 25px
-
-  rgba(
-    124,
-    58,
-    237,
-    .35
-  );
-
-
-}
-
-
-
-
-.current-tag {
-
-
-  position:absolute;
-
-  top:12px;
-
-  right:15px;
-
-  background:#7c3aed;
-
-  padding:5px 10px;
-
-  border-radius:20px;
-
-  font-size:12px;
-
-  font-weight:700;
-
-}
-
-
-
-.exercise-card h2 {
-
-
-  margin:0 0 10px;
-
-  font-size:20px;
-
-
-}
-
-
-
-.exercise-card p {
-
-
-  margin:0 0 18px;
-
-  color:#a1a1aa;
-
-
-}
-
-
-
-/* =========================
-   SET BUTTONS
-========================= */
-
-
-.sets {
-
-
-  display:flex;
-
-  gap:10px;
-
-  flex-wrap:wrap;
-
-
-}
-
-
-
-.sets button {
-
-
-  width:42px;
-
-  height:42px;
-
-  border-radius:50%;
-
-  border:2px solid #52525b;
-
-  background:#111827;
-
-  color:white;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-weight:700;
-
-
-}
-
-
-
-.sets button:hover {
-
-
-  border-color:#8b5cf6;
-
-
-}
-
-
-
-.sets button.set-done {
-
-
-  background:#22c55e;
-
-  border-color:#22c55e;
-
-
-}
-
-
-
-
-
-/* =========================
-   FINISH
-========================= */
-
-
-.finish-button {
-
-
-  margin-bottom:40px;
-
-}
-
-
-
-
-
-/* =========================
-   MOBILE
-========================= */
-
-
-@media(max-width:480px){
-
-
-.app {
-
-  padding:15px;
-
-}
-
-
-
-.home-header h1 {
-
-  font-size:24px;
-
-}
-
-
-
-.timer-card strong {
-
-  font-size:32px;
-
-}
-
-
-
-.exercise-card {
-
-  padding:17px;
-
-}
-
-
-
-.exercise-card h2 {
-
-  font-size:18px;
-
-}
-
-
-}
-
-/* =========================
-   CURRENT EXERCISE CARD
-========================= */
-
-.current-exercise-card {
-
-  background:
-  linear-gradient(
-    145deg,
-    #25203f,
-    #151820
-  );
-
-  border: 2px solid #8b5cf6;
-
-  border-radius: 22px;
-
-  padding: 24px;
-
-  margin: 20px 0;
-
-  text-align: center;
-
-  box-shadow:
-  0 10px 30px rgba(0,0,0,0.25);
-
-}
-
-
-.current-exercise-card h2 {
-
-  font-size: 14px;
-
-  text-transform: uppercase;
-
-  letter-spacing: 1.5px;
-
-  color: #c4b5fd;
-
-  margin-bottom: 12px;
-
-}
-
-
-.current-exercise-card h1 {
-
-  font-size: 26px;
-
-  line-height: 1.2;
-
-  margin: 10px 0;
-
-}
-
-
-.current-exercise-card p {
-
-  font-size: 18px;
-
-  color: #d1d5db;
-
-}
-
-
-/* =========================
-   COMPLETE BUTTON
-========================= */
-
-.complete-button {
-
-  margin-top: 16px;
-
-  width: 100%;
-
-  padding: 14px;
-
-  border-radius: 14px;
-
-  border: none;
-
-  background: #22c55e;
-
-  color: white;
-
-  font-size: 16px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-}
-
-
-.complete-button:hover {
-
-  opacity: .85;
-
-}
-
-
-
-/* =========================
-   ALL EXERCISES TITLE
-========================= */
-
-.section-title {
-
-  margin: 25px 0 15px;
-
-  font-size: 22px;
-
-}
-
-
-
-/* =========================
-   ACTIVE EXERCISE
-========================= */
-
-
-.exercise-card.active {
-
-  border: 2px solid #8b5cf6;
-
-  background:
-
-  linear-gradient(
-    145deg,
-    #241946,
-    #171a22
-  );
-
-  transform: scale(1.02);
-
-}
-
-
-/* =========================
-   MAKE CLICKABLE
-========================= */
-
-.exercise-card {
-
-  cursor: pointer;
-
-  transition:
-
-  transform .2s ease,
-
-  border-color .2s ease,
-
-  background .2s ease;
-
-}
-
-
-/* =========================
-   CURRENT TAG
-========================= */
-
-.current-tag {
-
-  display:inline-block;
-
-  padding:5px 12px;
-
-  border-radius:20px;
-
-  background:#8b5cf6;
-
-  color:white;
-
-  font-size:12px;
-
-  font-weight:700;
-
-  margin-bottom:10px;
-
-}
-
-
-
-/* =========================
-   MOBILE FIXES
-========================= */
-
-@media(max-width:700px){
-
-  .current-exercise-card h1 {
-
-    font-size:22px;
-
-  }
-
-
-  .timer-card {
-
-    padding:18px;
-
-  }
-
-
-}
-
-/* Exercise navigation */
-
-.exercise-navigation {
-
-display:flex;
-
-gap:12px;
-
-margin-top:16px;
-
-}
-
-
-
-.nav-button {
-
-flex:1;
-
-padding:12px;
-
-border-radius:14px;
-
-border:1px solid #444;
-
-background:#20242f;
-
-color:white;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-
-
-.nav-button:hover:not(:disabled){
-
-background:#8b5cf6;
-
-border-color:#8b5cf6;
-
-}
-
-
-
-.nav-button:disabled {
-
-opacity:.35;
-
-cursor:not-allowed;
-
-}
-
-.complete-button:disabled {
-
-background:#374151;
-
-cursor:not-allowed;
-
-opacity:.6;
-
-}
-
-/* ============================
-   CURRENT EXERCISE CARD
-============================ */
+/* ================= CURRENT EXERCISE ================= */
 
 
 .current-exercise-card {
 
-background:
-linear-gradient(
-145deg,
-#25203f,
-#171a22
-);
+background:#181b22;
 
-border:2px solid #8b5cf6;
+border-radius:25px;
 
-border-radius:24px;
-
-padding:24px;
-
-margin:20px 0;
+padding:25px;
 
 text-align:center;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,.25);
-
-}
-
-
-
-.current-exercise-card h2 {
-
-font-size:13px;
-
-text-transform:uppercase;
-
-letter-spacing:2px;
-
-color:#c4b5fd;
-
-margin-bottom:10px;
-
-}
-
-
-
-.current-exercise-card h1 {
-
-font-size:26px;
-
-margin:10px 0;
-
-}
-
-
-
-.current-exercise-card p {
-
-color:#d1d5db;
-
-font-size:17px;
-
-}
-
-
-
-
-/* ============================
-   CURRENT SET BUTTONS
-============================ */
-
-
-.current-sets {
 
 display:flex;
 
 flex-direction:column;
 
-gap:10px;
+gap:12px;
 
-margin-top:20px;
+border-left:6px solid transparent;
 
 }
 
 
 
-.current-set {
+.current-exercise-card p {
+
+opacity:.6;
+
+font-size:14px;
+
+}
+
+
+
+.current-exercise-card h2 {
+
+font-size:28px;
+
+}
+
+
+
+
+/* ================= EXERCISE COLOURS ================= */
+
+
+.current-exercise-card.pull {
+
+border-left-color:purple;
+
+}
+
+
+.current-exercise-card.push {
+
+border-left-color:red;
+
+}
+
+
+.current-exercise-card.skill {
+
+border-left-color:blue;
+
+}
+
+
+.current-exercise-card.core {
+
+border-left-color:orange;
+
+}
+
+
+.current-exercise-card.warmup {
+
+border-left-color:green;
+
+}
+
+
+
+
+
+/* ================= SET INPUT ================= */
+
+
+.set-input {
 
 display:flex;
 
+flex-direction:column;
+
 align-items:center;
 
-justify-content:flex-start;
+gap:10px;
 
-gap:14px;
+}
+
+
+
+.set-row {
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:12px;
 
 width:100%;
 
-padding:14px 16px;
+margin-bottom:10px;
 
-border-radius:16px;
+}
 
-background:#20242f;
 
-border:1px solid #3f4555;
+
+.set-row input {
+
+background:#222;
 
 color:white;
 
+border:none;
+
+border-radius:12px;
+
+padding:14px;
+
 font-size:16px;
 
-font-weight:600;
+width:120px;
 
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-
-
-.current-set:hover {
-
-border-color:#8b5cf6;
-
-}
-
-
-
-.current-set.done {
-
-background:
-
-linear-gradient(
-90deg,
-#14532d,
-#166534
-);
-
-border-color:#22c55e;
-
-}
-
-
-
-.current-set svg {
-
-width:22px;
-
-height:22px;
-
-color:#22c55e;
+text-align:center;
 
 }
 
 
 
 
-/* ============================
-   BACK / NEXT BUTTONS
-============================ */
+
+.set-complete-button {
+
+width:40px;
+
+height:40px;
+
+border-radius:50%;
+
+background:#252932;
+
+color:white;
+
+border:none;
+
+font-size:18px;
+
+}
+
+
+
+.set-complete-button.done {
+
+background:#2ecc71;
+
+}
+
+
+
+
+
+/* ================= SET TRACKER ================= */
+
+
+.set-tracker {
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+}
+
+
+
+.set-button {
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+background:#252932;
+
+color:white;
+
+border:none;
+
+}
+
+
+
+.set-button.done {
+
+background:#2ecc71;
+
+}
+
+
+
+
+
+/* ================= NAVIGATION ================= */
 
 
 .exercise-navigation {
 
 display:flex;
 
-gap:12px;
-
-margin-top:20px;
+gap:15px;
 
 }
 
 
 
-.nav-button {
+.exercise-navigation button {
 
 flex:1;
 
-padding:13px;
-
-border-radius:14px;
-
-border:1px solid #3f4555;
-
-background:#20242f;
+background:#181b22;
 
 color:white;
 
-font-weight:700;
+padding:15px;
+
+border-radius:16px;
+
+border:none;
+
+}
+
+
+
+
+
+/* ================= REST CONTROLS ================= */
+
+
+.timer-controls {
+
+display:flex;
+
+gap:10px;
+
+}
+
+
+
+.timer-controls button {
+
+background:#252932;
+
+color:white;
+
+padding:10px;
+
+border-radius:12px;
+
+border:none;
+
+}
+
+
+
+.skip-button {
+
+margin-top:10px;
+
+background:#252932;
+
+color:white;
+
+padding:12px;
+
+border-radius:12px;
+
+border:none;
+
+}
+
+
+
+
+
+/* ================= PREVIOUS PERFORMANCE ================= */
+
+
+.previous-performance {
+
+background:#222;
+
+border-radius:14px;
+
+padding:12px;
+
+}
+
+
+
+.previous-performance h3 {
+
+margin:0;
+
+font-size:14px;
+
+opacity:.7;
+
+}
+
+
+
+
+
+/* ================= PROGRESS ================= */
+
+
+.progress-bar {
+
+height:10px;
+
+background:#333;
+
+border-radius:10px;
+
+overflow:hidden;
+
+margin-bottom:20px;
+
+}
+
+
+
+.progress-fill {
+
+height:100%;
+
+background:white;
+
+transition:.3s;
+
+}
+
+
+
+
+
+/* ================= HISTORY ================= */
+
+
+.history-page {
+
+max-width:600px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+
+
+.history-card {
+
+background:#181b22;
+
+border-radius:20px;
+
+padding:20px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.history-exercise {
+
+background:#222;
+
+border-radius:14px;
+
+padding:12px;
+
+margin-top:15px;
+
+}
+
+
+
+
+
+/* ================= PERSONAL RECORDS ================= */
+
+
+.personal-records {
+
+background:#181b22;
+
+border-radius:20px;
+
+padding:20px;
+
+}
+
+
+
+
+
+/* ================= COMPLETE SCREEN ================= */
+
+
+.workout-complete {
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:20px;
+
+}
+
+
+
+.completion-card {
+
+background:#181b22;
+
+border-radius:25px;
+
+padding:30px;
+
+text-align:center;
+
+width:100%;
+
+}
+
+
+
+.completion-icon {
+
+font-size:60px;
+
+}
+
+
+
+.completion-stat {
+
+background:#222;
+
+border-radius:14px;
+
+padding:15px;
+
+margin:15px 0;
+
+}
+
+
+
+.completion-stat strong {
+
+font-size:28px;
+
+}
+
+
+
+.home-complete-button {
+
+width:100%;
+
+background:#2ecc71;
+
+color:white;
+
+padding:16px;
+
+border-radius:16px;
+
+border:none;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+/* ================= WORKOUT COLOURS ================= */
+
+
+.workout-card.monday {
+
+background:#35224f;
+
+border:1px solid #8b5cf6;
+
+}
+
+
+.workout-card.wednesday {
+
+background:#16324a;
+
+border:1px solid #3498db;
+
+}
+
+
+.workout-card.friday {
+
+background:#4a2025;
+
+border:1px solid #e74c3c;
+
+}
+
+
+.workout-card.sunday {
+
+background:#16402b;
+
+border:1px solid #2ecc71;
+
+}
+
+
+
+
+.history-expand {
+
+opacity:.6;
+
+font-size:14px;
+
+}
+
+
+
+.history-card {
+
+background:#181b22;
+
+border-radius:20px;
+
+padding:20px;
+
+margin-bottom:20px;
 
 cursor:pointer;
 
@@ -1170,83 +857,45 @@ transition:.2s;
 
 
 
-.nav-button:hover:not(:disabled){
+.history-card:hover {
 
-background:#8b5cf6;
+transform:none;
 
-border-color:#8b5cf6;
+}
+
+
+.history-details {
+
+margin-top:20px;
+
+}
+
+
+.history-exercise {
+
+background:#222;
+
+border-radius:14px;
+
+padding:12px;
+
+margin-top:15px;
 
 }
 
 
 
-.nav-button:disabled {
 
-opacity:.35;
+.app-title {
 
-cursor:not-allowed;
+display:flex;
 
-}
+align-items:center;
 
+justify-content:center;
 
+gap:10px;
 
-
-/* ============================
-   BETTER ACTIVE EXERCISE
-============================ */
-
-
-.exercise-card.active {
-
-border:2px solid #8b5cf6;
-
-background:
-
-linear-gradient(
-145deg,
-#241946,
-#171a22
-);
-
-transform:scale(1.02);
+font-size:30px;
 
 }
-
-
-
-/* ============================
-   CURRENT LABEL
-============================ */
-
-
-.current-tag {
-
-background:#8b5cf6;
-
-color:white;
-
-padding:5px 12px;
-
-border-radius:20px;
-
-font-size:12px;
-
-font-weight:800;
-
-display:inline-block;
-
-margin-bottom:10px;
-
-letter-spacing:1px;
-
-}
-
-.workout-header {
-  padding-top: 0;
-  margin-top: 0;
-}
-
-.current-exercise-card {
-  margin-top: 10px;
-}
-
