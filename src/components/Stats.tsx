@@ -50,7 +50,7 @@ Math.floor(
 
 return (
 
-<section className="stats">
+<section className="workouts-stat">
 
 
 <div>
