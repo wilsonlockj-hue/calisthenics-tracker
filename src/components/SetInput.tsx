@@ -6,15 +6,17 @@ type Props = {
 
   tracking:string;
 
+  rest:number;
+
   performance:any[];
 
-  setPerformance:(value:any)=>void;
+  setPerformance:(value:any[])=>void;
 
-  completedSets:string[];
-
-  toggleSet:(id:string)=>void;
+  setRestTimer:(value:number)=>void;
 
 };
+
+
 
 
 
@@ -26,46 +28,73 @@ sets,
 
 tracking,
 
-performance = [],
+rest,
+
+performance,
 
 setPerformance,
 
-completedSets = [],
-
-toggleSet
+setRestTimer
 
 }:Props){
 
 
 
+
+
+
 function updateSet(
+
 setNumber:number,
+
 field:string,
+
 value:string
+
 ){
 
 
+
 const existing =
+
 performance.find(
+
 item =>
+
 item.exerciseId === exerciseId &&
+
 item.setNumber === setNumber
+
 );
+
+
+
 
 
 
 const updated =
+
 performance.filter(
+
 item =>
+
 !(
+
 item.exerciseId === exerciseId &&
+
 item.setNumber === setNumber
+
 )
+
 );
 
 
 
-setPerformance([
+
+
+
+
+const newPerformance = [
 
 ...updated,
 
@@ -75,35 +104,138 @@ exerciseId,
 
 setNumber,
 
-[field]:value,
+reps:
 
-reps:existing?.reps ?? "",
+field === "reps"
 
-weight:existing?.weight ?? "",
+?
 
-duration:existing?.duration ?? ""
+value
+
+:
+
+existing?.reps ?? "",
+
+
+weight:
+
+field === "weight"
+
+?
+
+value
+
+:
+
+existing?.weight ?? "",
+
+
+duration:
+
+field === "duration"
+
+?
+
+value
+
+:
+
+existing?.duration ?? ""
 
 }
 
-]);
+];
+
+
+
+
+
+setPerformance(newPerformance);
+
+
+
+
+
+
+
+const completedSet =
+
+newPerformance.some(
+
+(item:any)=>
+
+item.exerciseId === exerciseId &&
+
+item.setNumber === setNumber &&
+
+(
+
+item.reps ||
+
+item.weight ||
+
+item.duration
+
+)
+
+);
+
+
+
+
+
+if(completedSet){
+
+setRestTimer(rest);
+
+}
+
 
 
 }
+
+
+
+
+
 
 
 
 function getValue(
+
 setNumber:number,
+
 field:string
+
 ){
 
-return performance.find(
+
+return (
+
+performance.find(
+
 item =>
+
 item.exerciseId === exerciseId &&
+
 item.setNumber === setNumber
-)?.[field] || "";
+
+)?.[field]
+
+||
+
+""
+
+);
+
 
 }
+
+
+
+
+
+
 
 
 
@@ -112,23 +244,61 @@ return (
 <section className="set-input">
 
 
+
 <h3>
+
 Sets
+
 </h3>
+
+
+
+
 
 
 
 {
 
-Array.from({length:sets}).map((_,index)=>{
+Array.from({
+
+length:sets
+
+}).map((_,index)=>{
 
 
-const id =
-`${exerciseId}-set-${index+1}`;
+
+const setNumber = index + 1;
+
+
+
 
 
 const completed =
-completedSets.includes(id);
+
+performance.some(
+
+(item:any)=>
+
+item.exerciseId === exerciseId &&
+
+item.setNumber === setNumber &&
+
+(
+
+item.reps ||
+
+item.weight ||
+
+item.duration
+
+)
+
+);
+
+
+
+
+
 
 
 
@@ -136,16 +306,27 @@ return (
 
 <div
 
-key={index}
+key={setNumber}
 
 className="set-row"
 
 >
 
 
+
+
+
+
+
 <strong>
-Set {index+1}
+
+Set {setNumber}
+
 </strong>
+
+
+
+
 
 
 
@@ -155,27 +336,49 @@ Set {index+1}
 
 tracking !== "hold" && (
 
+
 <input
+
+type="number"
 
 placeholder="Reps"
 
 value={
-getValue(index+1,"reps")
+
+getValue(
+
+setNumber,
+
+"reps"
+
+)
+
 }
 
 onChange={(e)=>
+
 updateSet(
-index+1,
+
+setNumber,
+
 "reps",
+
 e.target.value
+
 )
+
 }
 
 />
 
+
 )
 
 }
+
+
+
+
 
 
 
@@ -185,27 +388,49 @@ e.target.value
 
 tracking === "weight" && (
 
+
 <input
+
+type="number"
 
 placeholder="Weight"
 
 value={
-getValue(index+1,"weight")
+
+getValue(
+
+setNumber,
+
+"weight"
+
+)
+
 }
 
 onChange={(e)=>
+
 updateSet(
-index+1,
+
+setNumber,
+
 "weight",
+
 e.target.value
+
 )
+
 }
 
 />
 
+
 )
 
 }
+
+
+
+
 
 
 
@@ -215,24 +440,42 @@ e.target.value
 
 tracking === "hold" && (
 
+
 <input
+
+type="number"
 
 placeholder="Seconds"
 
 value={
-getValue(index+1,"duration")
+
+getValue(
+
+setNumber,
+
+"duration"
+
+)
+
 }
 
 onChange={(e)=>
+
 updateSet(
-index+1,
+
+setNumber,
+
 "duration",
+
 e.target.value
+
 )
+
 }
 
 />
 
+
 )
 
 }
@@ -241,29 +484,42 @@ e.target.value
 
 
 
-<button
+
+
+
+
+<span
 
 className={
-completed
-?
-"set-complete-button done"
-:
-"set-complete-button"
-}
 
-onClick={()=>toggleSet(id)}
+completed
+
+?
+
+"set-complete-button done"
+
+:
+
+"set-complete-button"
+
+}
 
 >
 
 ✓
 
-</button>
+</span>
+
+
+
+
 
 
 
 </div>
 
 );
+
 
 })
 
@@ -275,7 +531,9 @@ onClick={()=>toggleSet(id)}
 
 );
 
+
 }
+
 
 
 export default SetInput;

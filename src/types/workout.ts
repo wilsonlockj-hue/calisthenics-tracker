@@ -85,4 +85,8 @@ export type Workout = {
   focus: string;
 
   exercises: Exercise[];
+
+  custom?: boolean;
+
+  modified?: boolean;
 };

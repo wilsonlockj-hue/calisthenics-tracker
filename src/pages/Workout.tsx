@@ -22,9 +22,13 @@ function Workout(){
 
 
 const {
-  day
-}=useParams();
+day
+}=useParams<{day:string}>();
 
+
+if(!day){
+  return <h1>Workout not found</h1>;
+}
 
 
 const navigate =
@@ -32,24 +36,69 @@ useNavigate();
 
 
 
-const workout =
+
+
+const originalWorkout =
 workouts.find(
 (item)=>item.id===day
 );
 
 
 
+const customWorkouts =
+JSON.parse(
+localStorage.getItem("custom-workouts") || "{}"
+);
+
+
+
+let workout = originalWorkout;
+
+
+
+
+if(customWorkouts[day]){
+
+  // Custom workout
+  if(customWorkouts[day].custom){
+
+    workout = customWorkouts[day];
+
+  }
+
+  // Modified existing workout
+  else if(originalWorkout && customWorkouts[day].exercises){
+
+    workout = {
+
+      ...originalWorkout,
+
+      id: originalWorkout.id,
+
+      title: originalWorkout.title,
+
+      focus: originalWorkout.focus,
+
+      exercises: customWorkouts[day].exercises
+
+    };
+
+  }
+
+}
+
+
+// Outside the custom check
 if(!workout){
 
-return <h1>Workout not found</h1>
+  return <h1>Workout not found</h1>;
 
 }
 
 
 
-const {
 
-currentExercise,
+const {
 
 exercise,
 
@@ -59,13 +108,13 @@ performance,
 
 setPerformance,
 
-toggleSet,
-
 completeExercise,
 
 finishWorkout,
 
 workoutComplete,
+
+workoutSummary,
 
 nextExercise,
 
@@ -75,16 +124,40 @@ elapsed,
 
 restTimer,
 
+setRestTimer,
+
 restPaused,
 
 setRestPaused,
 
 changeRest,
 
-skipRest
+skipRest,
+
+closeSummary,
 
 }=useWorkout(workout);
 
+
+
+
+
+
+
+function handlePrevious(){
+
+if(workoutSummary){
+
+closeSummary();
+
+return;
+
+}
+
+
+previousExercise();
+
+}
 
 
 
@@ -96,7 +169,6 @@ return (
 
 <main className="workout-complete">
 
-
 <section className="completion-card">
 
 
@@ -107,18 +179,14 @@ return (
 </div>
 
 
-
 <h1>
 Workout Complete
 </h1>
 
 
-
 <h2>
 {workout.title}
 </h2>
-
-
 
 
 
@@ -136,8 +204,6 @@ Workout Complete
 
 
 
-
-
 <div className="completion-stat">
 
 <span>
@@ -149,8 +215,6 @@ Workout Complete
 </strong>
 
 </div>
-
-
 
 
 
@@ -169,7 +233,6 @@ Back Home
 
 
 </section>
-
 
 </main>
 
@@ -243,21 +306,6 @@ Finish Workout
 
 
 
-
-
-
-<ExerciseNavigation
-
-previousExercise={previousExercise}
-
-nextExercise={nextExercise}
-
-/>
-
-
-
-
-
 <button
 
 className="all-exercises-button"
@@ -282,13 +330,100 @@ View All Exercises
 
 
 
+<ExerciseNavigation
+
+previousExercise={handlePrevious}
+
+nextExercise={nextExercise}
+
+/>
+
+
+
+
+
+
+
+
+
+{
+workoutSummary ? (
+
+<section className="completion-card">
+
+
+<div className="completion-icon">
+🎉
+</div>
+
+
+<h1>
+Workout Completed
+</h1>
+
+
+<h2>
+{workout.title}
+</h2>
+
+
+
+<div className="completion-stat">
+
+<span>
+⏱ Duration
+</span>
+
+<strong>
+{Math.floor(elapsed / 60)} mins
+</strong>
+
+</div>
+
+
+
+<div className="completion-stat">
+
+<span>
+💪 Exercises
+</span>
+
+<strong>
+{workout.exercises.length}
+</strong>
+
+</div>
+
+
+
+<p>
+You've completed all exercises.
+</p>
+
+
+
+<p>
+Review your workout or press Finish Workout to save.
+</p>
+
+
+
+</section>
+
+
+)
+
+:
+
+(
+
+exercise && (
+
 <ExerciseCard
 
 exercise={exercise}
 
 completedSets={completedSets}
-
-toggleSet={toggleSet}
 
 completeExercise={completeExercise}
 
@@ -296,7 +431,15 @@ performance={performance}
 
 setPerformance={setPerformance}
 
+setRestTimer={setRestTimer}
+
 />
+
+)
+
+)
+
+}
 
 
 
@@ -325,7 +468,8 @@ skipRest={skipRest}
 );
 
 
-}
 
+
+}
 
 export default Workout;

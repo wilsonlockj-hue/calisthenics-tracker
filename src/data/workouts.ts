@@ -5,7 +5,7 @@ export const workouts: Workout[] = [
 
 
 {
-id:"monday",
+id:"pull-volume",
 
 title:"Pull Volume",
 
@@ -27,7 +27,7 @@ tracking:"none"
 
 
 {
-id:"handstand-supported",
+id:"pullvolume-handstand-supported",
 name:"Handstand Supported Holds",
 category:"Skill",
 sets:2,
@@ -56,7 +56,7 @@ tracking:"hold"
 
 
 {
-id:"pull-warmup",
+id:"pullvolume-warmup",
 name:"Pull Warmup",
 notes:"Dead Hang + Scapular Pull-ups + Band Pull-aparts + Band Rotations",
 category:"Mobility",
@@ -94,7 +94,7 @@ tracking:"reps"
 
 
 {
-id:"australian-rows",
+id:"pullvolume-australian-rows",
 name:"Australian Rows",
 category:"Pull",
 sets:2,
@@ -108,7 +108,7 @@ tracking:"reps"
 
 
 {
-id:"pike-pushups",
+id:"pullvolume-pike-pushups",
 name:"Pike Push-ups",
 category:"Push",
 sets:2,
@@ -130,7 +130,7 @@ tracking:"reps"
 
 
 {
-id:"compression",
+id:"pullvolume-compression",
 name:"Seated Compression Lifts",
 category:"Core",
 sets:2,
@@ -141,7 +141,7 @@ tracking:"reps"
 
 
 {
-id:"hollow-holds",
+id:"pullvolume-hollow-holds",
 name:"Hollow Body Holds",
 category:"Core",
 sets:2,
@@ -155,8 +155,9 @@ tracking:"hold"
 
 },
 
+
 {
-id:"wednesday",
+id:"pull-skill",
 
 title:"Pull Skill",
 
@@ -178,7 +179,7 @@ tracking:"none"
 
 
 {
-id:"handstand-supported",
+id:"pullskill-handstand-supported",
 name:"Handstand Supported Holds",
 category:"Skill",
 sets:2,
@@ -201,7 +202,7 @@ tracking:"reps"
 
 
 {
-id:"pike-pushups",
+id:"pullskill-pike-pushups",
 name:"Pike Push-ups",
 category:"Push",
 sets:3,
@@ -212,7 +213,7 @@ tracking:"reps"
 
 
 {
-id:"pull-warmup",
+id:"pullskill-warmup",
 name:"Pull Warmup",
 notes:"Dead Hang + Scapular Pull-ups + Band Pull-aparts + Band Rotations",
 category:"Mobility",
@@ -301,7 +302,7 @@ tracking:"reps"
 
 
 {
-id:"compression",
+id:"pullskill-compression",
 name:"Seated Compression Lifts",
 category:"Core",
 sets:2,
@@ -312,7 +313,7 @@ tracking:"reps"
 
 
 {
-id:"hollow-holds",
+id:"pullskill-hollow-holds",
 name:"Hollow Body Holds",
 category:"Core",
 sets:2,
@@ -325,6 +326,8 @@ tracking:"hold"
 ]
 
 },
+
+
 
 {
 id:"friday",
@@ -361,7 +364,7 @@ tracking:"reps"
 
 
 {
-id:"handstand-attempts",
+id:"handstand-attempts-friday",
 name:"Handstand Attempts",
 category:"Skill",
 sets:1,
@@ -373,7 +376,7 @@ tracking:"hold"
 
 
 {
-id:"pull-warmup",
+id:"friday-pull-warmup",
 name:"Pull Warmup",
 notes:"Dead Hang + Scapular Pull-ups + Band Pull-aparts + Band Rotations",
 category:"Mobility",
@@ -432,7 +435,7 @@ tracking:"reps"
 
 
 {
-id:"australian-rows",
+id:"friday-australian-rows",
 name:"Australian Rows",
 category:"Pull",
 sets:3,
@@ -445,6 +448,8 @@ tracking:"reps"
 ]
 
 },
+
+
 
 {
 id:"sunday",
@@ -469,7 +474,7 @@ tracking:"none"
 
 
 {
-id:"handstand-attempts",
+id:"sunday-handstand-attempts",
 name:"Handstand Attempts",
 category:"Skill",
 sets:1,
@@ -520,7 +525,7 @@ tracking:"reps"
 
 
 {
-id:"pull-warmup",
+id:"sunday-pull-warmup",
 name:"Pull Warmup",
 notes:"Dead Hang + Scapular Pull-ups + Band Pull-aparts + Band Rotations",
 category:"Mobility",
@@ -533,7 +538,7 @@ tracking:"none"
 
 
 {
-id:"australian-rows",
+id:"sunday-australian-rows",
 name:"Australian Rows",
 category:"Pull",
 sets:6,
@@ -544,7 +549,7 @@ tracking:"reps"
 
 
 {
-id:"straight-bar-dips",
+id:"sunday-straight-bar-dips",
 name:"Straight Bar Dips",
 category:"Push",
 sets:3,
@@ -555,7 +560,7 @@ tracking:"reps"
 
 
 {
-id:"pike-pushups",
+id:"sunday-pike-pushups",
 name:"Pike Push-ups",
 category:"Push",
 sets:4,
@@ -594,3 +599,5 @@ tracking:"reps"
 
 
 ];
+
+export default workouts;

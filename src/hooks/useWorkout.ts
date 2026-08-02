@@ -8,20 +8,51 @@ import type {
 } from "../types/workout";
 
 
+const ACTIVE_WORKOUT_KEY = "active-workout";
+
+
+
 export function useWorkout(workout:Workout){
+
+
+const savedCustomWorkouts =
+JSON.parse(
+localStorage.getItem("custom-workouts") || "{}"
+);
+
+
+
+const savedWorkout =
+savedCustomWorkouts[workout.id];
+
+
+const activeWorkout =
+Array.isArray(savedWorkout)
+
+?
+{
+  ...workout,
+  exercises:savedWorkout
+}
+
+:
+
+savedWorkout ?? workout;
+
+
 
 
 let saved = null;
 
 try {
 
-  saved = JSON.parse(
-    localStorage.getItem(`workout-${workout.id}`) || "null"
-  );
+saved = JSON.parse(
+localStorage.getItem(`workout-${activeWorkout.id}`) || "null"
+);
 
 } catch {
 
-  saved = null;
+saved = null;
 
 }
 
@@ -33,55 +64,64 @@ let savedHistory = [];
 
 try {
 
-  savedHistory = JSON.parse(
-    localStorage.getItem("workout-history") || "[]"
-  );
+savedHistory = JSON.parse(
+localStorage.getItem("workout-history") || "[]"
+);
 
 } catch {
 
-  savedHistory = [];
+savedHistory = [];
 
 }
 
 
 
 
+
 const [currentExercise,setCurrentExercise] =
-useState(
-  saved?.currentExercise ?? 0
-);
+useState<number>(0);
 
 
 const [completedSets,setCompletedSets] =
-useState<string[]>(
+useState<any[]>(
   saved?.completedSets ?? []
 );
 
 
+
 const [performance,setPerformance] =
 useState<any[]>(
-  saved?.performance ?? []
+saved?.performance ?? []
 );
 
 
+
 const [elapsed,setElapsed] =
-useState(
+useState<number>(
   saved?.elapsed ?? 0
 );
 
 
+
 const [restTimer,setRestTimer] =
-useState(
+useState<number>(
   saved?.restTimer ?? 0
 );
 
 
-  const [restPaused,setRestPaused] = useState(false);
+
+const [restPaused,setRestPaused] =
+useState(false);
+
 
 
 const [workoutComplete,setWorkoutComplete] =
 useState(false);
 
+
+
+const [workoutSummary,setWorkoutSummary] =
+useState(false);
 
 
 
@@ -93,20 +133,36 @@ useState<any[]>(savedHistory);
 
 
 
-  /*
-    Load saved workout
-  */
 
- 
+useEffect(()=>{
 
 
+const current =
+localStorage.getItem(
+ACTIVE_WORKOUT_KEY
+);
 
 
-  /*
-    Save workout
-  */
 
-  useEffect(()=>{
+if(!current){
+
+localStorage.setItem(
+ACTIVE_WORKOUT_KEY,
+activeWorkout.id
+);
+
+}
+
+
+},[activeWorkout.id]);
+
+
+
+
+
+
+
+useEffect(()=>{
 
 
 if(workoutComplete){
@@ -116,11 +172,12 @@ return;
 }
 
 
+
 localStorage.setItem(
 
-      `workout-${workout.id}`,
+`workout-${activeWorkout.id}`,
 
-      JSON.stringify({
+JSON.stringify({
 
 currentExercise,
 
@@ -134,323 +191,426 @@ performance
 
 })
 
-    );
+);
 
 
-  },[
-    currentExercise,
-    completedSets,
-    elapsed,
-    restTimer,
-    performance,
-    workout.id
-  ]);
+},[
 
+currentExercise,
 
+completedSets,
 
+elapsed,
 
+restTimer,
 
-  /*
-    Workout timer
-  */
+performance,
 
-  useEffect(()=>{
+activeWorkout.id,
 
+workoutComplete
 
-    const timer = setInterval(()=>{
+]);
 
-      setElapsed(prev=>prev+1);
 
-    },1000);
 
 
-    return ()=>clearInterval(timer);
 
 
-  },[]);
 
 
+useEffect(()=>{
 
 
+const timer =
+setInterval(()=>{
 
-  /*
-    Rest timer
-  */
+setElapsed(
+prev=>prev+1
+);
 
-  useEffect(()=>{
 
+},1000);
 
-    if(restTimer <= 0 || restPaused){
 
-      return;
 
-    }
+return ()=>clearInterval(timer);
 
 
-    const timer = setInterval(()=>{
+},[]);
 
-      setRestTimer(prev=>prev-1);
 
-    },1000);
 
 
-    return ()=>clearInterval(timer);
 
 
-  },[
-    restTimer,
-    restPaused
-  ]);
 
 
+useEffect(()=>{
 
 
+if(
+restTimer <= 0 ||
+restPaused
+){
 
-  const exercise =
-    workout.exercises[currentExercise];
+return;
 
+}
 
 
 
+const timer =
+setInterval(()=>{
 
-  /*
-    Set completion
-  */
 
-  function toggleSet(id:string){
+setRestTimer(
+prev=>prev-1
+);
 
 
-    if(completedSets.includes(id)){
+},1000);
 
 
-      setCompletedSets(prev =>
-        prev.filter(
-          item => item !== id
-        )
-      );
 
+return ()=>clearInterval(timer);
 
-    }
 
-    else{
+},[
 
+restTimer,
 
-      setCompletedSets(prev => [
+restPaused
 
-        ...prev,
+]);
 
-        id
 
-      ]);
 
 
-      setRestTimer(
-        exercise.rest
-      );
 
 
-      setRestPaused(false);
 
+const exercise =
+activeWorkout.exercises?.[currentExercise];
 
-    }
 
 
-  }
 
 
 
 
 
-  /*
-    Timed exercise completion
-  */
+function closeSummary(){
 
-  function completeExercise(){
+setWorkoutSummary(false);
 
+}
 
-    setCompletedSets(prev=>{
 
 
-      if(
-        prev.includes(
-          `${exercise.id}-complete`
-        )
-      ){
 
-        return prev;
 
-      }
 
 
-      return [
 
-        ...prev,
+function toggleSet(id:string){
 
-        `${exercise.id}-complete`
 
-      ];
+if(completedSets.includes(id)){
 
 
-    });
+setCompletedSets(prev=>
 
+prev.filter(
+item=>item !== id
+)
 
-    setRestTimer(
-      exercise.rest
-    );
+);
 
 
-    setRestPaused(false);
+}
 
+else{
 
-  }
 
+setCompletedSets(prev=>[
 
+...prev,
 
+id
 
+]);
 
-  function undoExerciseComplete(){
 
+setRestTimer(
+exercise?.rest ?? 0
+);
 
-    setCompletedSets(prev =>
 
-      prev.filter(
+setRestPaused(false);
 
-        item =>
-        item !== `${exercise.id}-complete`
 
-      )
+}
 
-    );
 
+}
 
-  }
 
 
 
 
 
-  function nextExercise(){
 
+function completeExercise(){
 
-    if(
-      currentExercise <
-      workout.exercises.length - 1
-    ){
 
+if(!exercise){
 
-      setCurrentExercise(
-        prev=>prev+1
-      );
+return;
 
+}
 
-      setRestTimer(0);
 
+setCompletedSets(prev=>{
 
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
 
+if(
+prev.includes(
+`${exercise.id}-complete`
+)
+){
 
-    }
+return prev;
 
+}
 
-  }
 
+return [
 
+...prev,
 
+`${exercise.id}-complete`
 
+];
 
-  function previousExercise(){
 
+});
 
-    if(currentExercise > 0){
 
 
-      setCurrentExercise(
-        prev=>prev-1
-      );
+setRestTimer(
+exercise.rest ?? 0
+);
 
 
-      setRestTimer(0);
+setRestPaused(false);
 
 
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
+}
 
 
-    }
 
 
-  }
 
 
 
 
+function undoExerciseComplete(){
 
-  function skipRest(){
 
-    setRestTimer(0);
+if(!exercise){
 
-  }
+return;
 
+}
 
 
 
+setCompletedSets(prev=>
 
-  function changeRest(amount:number){
+prev.filter(
 
+item=>
 
-    setRestTimer(prev=>{
+item !== `${exercise.id}-complete`
 
+)
 
-      const value =
-        prev + amount;
+);
 
 
-      return value < 0
-        ? 0
-        : value;
+}
 
 
-    });
 
 
-  }
+
+
+
+
+function nextExercise(){
+
+
+if(
+currentExercise <
+activeWorkout.exercises.length - 1
+){
+
+
+setCurrentExercise(
+prev=>prev+1
+);
+
+
+setRestTimer(0);
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+}
+
+else{
+
+
+setWorkoutSummary(true);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+function previousExercise(){
+
+
+if(currentExercise > 0){
+
+
+setCurrentExercise(
+prev=>prev-1
+);
+
+
+setRestTimer(0);
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+function skipRest(){
+
+setRestTimer(0);
+
+}
+
+
+
+
+
+
+
+
+function changeRest(amount:number){
+
+
+setRestTimer(prev=>{
+
+
+const value =
+prev + amount;
+
+
+return value < 0
+?
+0
+:
+value;
+
+
+});
+
+
+}
+
+
+
+
+
+
+
 
 
 function finishWorkout(){
 
+
 if(workoutComplete){
-  return;
+
+return;
+
 }
+
 
 
 const session = {
 
-id: Date.now(),
 
-workoutId: workout.id,
+id:Date.now(),
 
-title: workout.title,
+workoutId:activeWorkout.id,
 
-date: new Date().toLocaleDateString(),
+title:activeWorkout.title,
 
-duration: elapsed,
+date:new Date().toLocaleDateString(),
+
+duration:elapsed,
 
 completedSets,
 
 performance
 
+
 };
+
+
+
 
 
 setHistory(prev=>{
 
 
-const updated = [
+const updated=[
 
 ...prev,
 
@@ -474,11 +634,22 @@ return updated;
 });
 
 
-// clear current workout save
+
+
+
 localStorage.removeItem(
-  `workout-${workout.id}`
+`workout-${activeWorkout.id}`
 );
 
+
+
+localStorage.removeItem(
+ACTIVE_WORKOUT_KEY
+);
+
+
+
+setWorkoutSummary(false);
 
 setWorkoutComplete(true);
 
@@ -486,94 +657,155 @@ setWorkoutComplete(true);
 }
 
 
-  function resetWorkout(){
-
-
-    setCurrentExercise(0);
-
-    setCompletedSets([]);
-
-    setElapsed(0);
-
-    setRestTimer(0);
-
-    setRestPaused(false);
-
-
-    localStorage.removeItem(
-      `workout-${workout.id}`
-    );
-
-
-  }
 
 
 
 
 
-  return {
-
-  history,
-
-  performance,
-
-  setPerformance,
-
-  currentExercise,
-
-  workoutComplete,
-
-  finishWorkout,
-
-  setCurrentExercise,
 
 
-    exercise,
+function scrapWorkout(){
 
 
-    completedSets,
+localStorage.removeItem(
+`workout-${activeWorkout.id}`
+);
 
 
-    elapsed,
+localStorage.removeItem(
+ACTIVE_WORKOUT_KEY
+);
 
 
-    restTimer,
+
+setCurrentExercise(0);
+
+setCompletedSets([]);
+
+setPerformance([]);
+
+setElapsed(0);
+
+setRestTimer(0);
 
 
-    setRestTimer,
+}
 
 
-    restPaused,
 
 
-    setRestPaused,
 
 
-    toggleSet,
 
 
-    completeExercise,
+
+function resetWorkout(){
 
 
-    undoExerciseComplete,
+setCurrentExercise(0);
+
+setCompletedSets([]);
+
+setElapsed(0);
+
+setRestTimer(0);
+
+setRestPaused(false);
 
 
-    nextExercise,
+
+localStorage.removeItem(
+`workout-${activeWorkout.id}`
+);
 
 
-    previousExercise,
+}
 
 
-    skipRest,
 
 
-    changeRest,
 
 
-    resetWorkout
 
 
-  };
+
+return {
+
+
+history,
+
+performance,
+
+setPerformance,
+
+
+currentExercise,
+
+
+workoutComplete,
+
+
+workoutSummary,
+
+
+finishWorkout,
+
+
+scrapWorkout,
+
+
+setCurrentExercise,
+
+
+exercise,
+
+
+completedSets,
+
+
+elapsed,
+
+
+restTimer,
+
+
+setRestTimer,
+
+
+restPaused,
+
+
+setRestPaused,
+
+
+toggleSet,
+
+
+completeExercise,
+
+
+undoExerciseComplete,
+
+
+nextExercise,
+
+
+closeSummary,
+
+
+previousExercise,
+
+
+skipRest,
+
+
+changeRest,
+
+
+resetWorkout
+
+
+};
 
 
 }

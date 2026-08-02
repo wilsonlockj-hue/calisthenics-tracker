@@ -368,6 +368,9 @@ border-left-color:green;
 /* ================= SET INPUT ================= */
 
 
+/* ================= SET INPUT ================= */
+
+
 .set-input {
 
 display:flex;
@@ -377,6 +380,112 @@ flex-direction:column;
 align-items:center;
 
 gap:10px;
+
+width:100%;
+
+}
+
+
+
+.set-row {
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:12px;
+
+width:100%;
+
+margin-bottom:10px;
+
+position:relative;
+
+}
+
+
+
+.set-row strong {
+
+min-width:60px;
+
+text-align:right;
+
+}
+
+
+
+.set-row input {
+
+background:#222;
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+padding:14px;
+
+font-size:16px;
+
+width:120px;
+
+text-align:center;
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+
+.set-row input:focus {
+
+outline:2px solid #3498db;
+
+}
+
+
+
+.set-complete-button {
+
+width:40px;
+
+height:40px;
+
+border-radius:50%;
+
+background:#252932;
+
+color:white;
+
+border:none;
+
+font-size:18px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+
+.set-complete-button.done {
+
+background:#2ecc71;
 
 }
 
@@ -791,7 +900,7 @@ font-weight:bold;
 /* ================= WORKOUT COLOURS ================= */
 
 
-.workout-card.monday {
+.workout-card.pull-volume {
 
 background:#35224f;
 
@@ -800,7 +909,7 @@ border:1px solid #8b5cf6;
 }
 
 
-.workout-card.wednesday {
+.workout-card.pull-skill {
 
 background:#16324a;
 
@@ -910,4 +1019,1008 @@ border-radius:20px;
 
 padding:20px;
 
+}
+
+
+
+
+
+
+.current-label {
+
+background:#2ecc71;
+
+color:white;
+
+font-size:12px;
+
+padding:4px 8px;
+
+border-radius:10px;
+
+margin-left:8px;
+
+}
+
+/* ================= EXERCISE TIMER ================= */
+
+
+.exercise-timer {
+
+background:#222;
+
+border-radius:20px;
+
+padding:20px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+
+
+.exercise-timer span {
+
+font-size:14px;
+
+opacity:.7;
+
+}
+
+
+
+.exercise-timer strong {
+
+font-size:36px;
+
+}
+
+
+
+.exercise-timer-controls {
+
+display:flex;
+
+gap:12px;
+
+}
+
+
+
+.exercise-timer-controls button {
+
+background:#252932;
+
+color:white;
+
+border:none;
+
+border-radius:14px;
+
+padding:12px 20px;
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+font-size:16px;
+
+}
+
+
+
+.exercise-timer-controls button:first-child {
+
+background:#2ecc71;
+
+}
+
+
+
+
+
+
+/* ================= EXERCISE LIST ================= */
+
+
+.exercise-list-page {
+
+max-width:600px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+
+
+.exercise-list {
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+
+
+.exercise-row {
+
+background:#181b22;
+
+border-radius:20px;
+
+padding:18px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+border-left:6px solid transparent;
+
+}
+
+
+
+.exercise-number {
+
+width:40px;
+
+height:40px;
+
+border-radius:50%;
+
+background:#252932;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:bold;
+
+}
+
+
+
+.exercise-content {
+
+flex:1;
+
+}
+
+
+
+.exercise-content h2 {
+
+font-size:20px;
+
+margin:0 0 8px;
+
+}
+
+
+
+.exercise-content p {
+
+margin:5px 0;
+
+opacity:.7;
+
+}
+
+
+
+.exercise-content span {
+
+font-size:14px;
+
+opacity:.7;
+
+}
+
+
+
+.exercise-rest {
+
+text-align:center;
+
+font-size:12px;
+
+opacity:.7;
+
+}
+
+
+
+.exercise-rest strong {
+
+display:block;
+
+font-size:18px;
+
+color:white;
+
+}
+
+
+
+/* Exercise category colours */
+
+
+.exercise-row.pull {
+
+border-left-color:purple;
+
+}
+
+
+.exercise-row.push {
+
+border-left-color:red;
+
+}
+
+
+.exercise-row.skill {
+
+border-left-color:blue;
+
+}
+
+
+.exercise-row.core {
+
+border-left-color:orange;
+
+}
+
+
+.exercise-row.warmup {
+
+border-left-color:green;
+
+}
+
+
+
+
+
+
+.delete-exercise {
+
+background:#e74c3c;
+
+color:white;
+
+border:none;
+
+padding:8px 12px;
+
+border-radius:12px;
+
+margin-top:10px;
+
+}
+
+
+.add-exercise {
+
+background:#2ecc71;
+
+color:white;
+
+border:none;
+
+padding:16px;
+
+border-radius:16px;
+
+font-size:16px;
+
+margin-top:10px;
+
+}
+
+
+
+
+
+/* ================= EXERCISE EDIT MODE ================= */
+
+
+.exercise-edit-button {
+
+background:#252932;
+
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:14px;
+
+font-size:16px;
+
+}
+
+
+
+.exercise-edit-panel {
+
+background:#181b22;
+
+border-radius:20px;
+
+padding:20px;
+
+margin-top:15px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+
+
+.exercise-edit-panel input,
+.exercise-edit-panel select {
+
+background:#222;
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+padding:14px;
+
+font-size:16px;
+
+width:100%;
+
+}
+
+
+
+.exercise-edit-panel label {
+
+font-size:14px;
+
+opacity:.7;
+
+}
+
+
+
+.save-exercise {
+
+background:#2ecc71;
+
+color:white;
+
+border:none;
+
+border-radius:14px;
+
+padding:14px;
+
+font-size:16px;
+
+}
+
+
+
+.cancel-edit {
+
+background:#252932;
+
+color:white;
+
+border:none;
+
+border-radius:14px;
+
+padding:14px;
+
+font-size:16px;
+
+}
+
+
+
+.exercise-actions {
+
+display:flex;
+
+gap:10px;
+
+margin-top:12px;
+
+}
+
+
+
+.edit-exercise {
+
+background:#3498db;
+
+color:white;
+
+border:none;
+
+padding:8px 12px;
+
+border-radius:12px;
+
+}
+
+
+
+.delete-exercise {
+
+background:#e74c3c;
+
+color:white;
+
+border:none;
+
+padding:8px 12px;
+
+border-radius:12px;
+
+}
+
+
+
+
+.exercise-actions {
+
+display:flex;
+
+gap:8px;
+
+margin-left:auto;
+
+}
+
+
+.exercise-actions button {
+
+width:40px;
+
+height:40px;
+
+border:none;
+
+border-radius:12px;
+
+background:#252932;
+
+color:white;
+
+font-size:18px;
+
+}
+
+
+.move-exercise {
+
+background:#16324a !important;
+
+}
+
+
+.edit-exercise {
+
+background:#8b5cf6 !important;
+
+}
+
+
+.delete-exercise {
+
+background:#e74c3c !important;
+
+}
+
+
+
+/* ================= EDIT WORKOUT BUTTON ================= */
+
+
+.edit-workout-button {
+
+width:100%;
+
+background:linear-gradient(
+135deg,
+#8b5cf6,
+#3498db
+);
+
+color:white;
+
+padding:16px;
+
+border-radius:16px;
+
+font-size:17px;
+
+font-weight:bold;
+
+border:none;
+
+margin-bottom:20px;
+
+}
+
+
+.edit-workout-button.active {
+
+background:linear-gradient(
+135deg,
+#2ecc71,
+#27ae60
+);
+
+}
+
+
+
+
+.modified-badge {
+
+background:#f39c12;
+
+color:white;
+
+font-size:12px;
+
+padding:4px 8px;
+
+border-radius:10px;
+
+margin-left:8px;
+
+font-weight:bold;
+
+}
+
+
+
+.revert-button {
+
+width:100%;
+
+margin-top:10px;
+
+background:linear-gradient(
+135deg,
+#e74c3c,
+#c0392b
+);
+
+color:white;
+
+padding:14px;
+
+border-radius:16px;
+
+border:none;
+
+font-weight:bold;
+
+font-size:16px;
+
+}
+
+
+
+
+/* =========================
+   Custom Workout Cards
+========================= */
+
+.workout-card.custom-workout {
+
+background:
+linear-gradient(
+135deg,
+#312e81,
+#4338ca
+);
+
+border:2px solid #6366f1;
+
+color:white;
+
+}
+
+
+.workout-card.custom-workout:hover {
+
+transform:translateY(-4px);
+
+box-shadow:
+0 10px 25px rgba(99,102,241,0.25);
+
+}
+
+
+.workout-card {
+    cursor: pointer;
+}
+
+
+.delete-workout {
+    margin-top: 12px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.delete-workout:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+
+.modified-badge {
+
+display:inline-block;
+
+margin-left:10px;
+
+padding:3px 8px;
+
+font-size:0.7rem;
+
+border-radius:20px;
+
+background:#fef3c7;
+
+color:#92400e;
+
+font-weight:700;
+
+}
+
+
+
+/* ==========================
+   Create Workout Page
+========================== */
+
+.create-workout-page {
+
+max-width:500px;
+
+margin:40px auto;
+
+padding:30px;
+
+background:#181b22;
+
+border-radius:25px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.35);
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+
+.create-workout-page h1 {
+
+text-align:center;
+
+font-size:30px;
+
+margin-bottom:0;
+
+}
+
+
+.create-workout-page::after {
+
+content:"Create a custom routine and add exercises later";
+
+display:block;
+
+text-align:center;
+
+color:#a1a1aa;
+
+font-size:14px;
+
+margin-bottom:15px;
+
+}
+
+
+
+.create-workout-page label {
+
+font-size:14px;
+
+opacity:.75;
+
+margin-top:10px;
+
+}
+
+
+
+.create-workout-page input {
+
+width:100%;
+
+box-sizing:border-box;
+
+padding:15px;
+
+border-radius:14px;
+
+border:none;
+
+background:#222;
+
+color:white;
+
+font-size:16px;
+
+}
+
+
+
+.create-workout-page input:focus {
+
+outline:2px solid #6366f1;
+
+}
+
+
+
+
+.create-workout-page button {
+
+margin-top:20px;
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+
+linear-gradient(
+135deg,
+#6366f1,
+#8b5cf6
+);
+
+color:white;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+
+.create-workout-page button:hover {
+
+transform:translateY(-3px);
+
+box-shadow:
+0 8px 20px rgba(139,92,246,0.25);
+
+}
+
+
+
+/* ==========================
+   Add Workout Button
+========================== */
+
+.add-workout-button {
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+#6366f1,
+#8b5cf6
+);
+
+color:white;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-top:10px;
+
+}
+
+
+
+.add-workout-button:hover {
+
+transform:translateY(-3px);
+
+box-shadow:
+0 8px 20px rgba(139,92,246,0.25);
+
+}
+
+
+.exercise-library {
+
+margin-top: 25px;
+padding: 20px;
+
+background: #151515;
+
+border-radius: 18px;
+
+}
+
+
+.exercise-library h2 {
+
+margin-bottom:20px;
+
+}
+
+
+
+.library-grid {
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+}
+
+
+
+.library-card {
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px;
+
+background:#202020;
+
+border-radius:14px;
+
+border:1px solid #333;
+
+}
+
+
+
+.library-card h3 {
+
+margin:0;
+
+font-size:16px;
+
+}
+
+
+
+.library-card span {
+
+font-size:13px;
+
+opacity:.7;
+
+}
+
+
+
+.library-card button {
+
+width:35px;
+
+height:35px;
+
+border-radius:50%;
+
+border:none;
+
+font-size:22px;
+
+cursor:pointer;
+
+}
+
+
+.exercise-add-buttons {
+
+display:flex;
+
+gap:15px;
+
+margin:25px 0;
+
+}
+
+
+
+.exercise-add-buttons .add-exercise:first-child {
+
+background:#2563eb;
+
+}
+
+
+
+.exercise-add-buttons .add-exercise:last-child {
+
+background:#16a34a;
+
+}
+
+
+
+
+.workout-title-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
 }

@@ -4,6 +4,14 @@ import {
 } from "react";
 
 
+import {
+  Play,
+  Pause,
+  RotateCcw
+} from "lucide-react";
+
+
+
 type Props = {
 
 duration:string;
@@ -11,6 +19,8 @@ duration:string;
 onComplete:()=>void;
 
 };
+
+
 
 
 
@@ -23,12 +33,15 @@ onComplete
 }:Props){
 
 
+
 const totalSeconds =
 parseInt(duration) * 60;
 
 
+
 const [seconds,setSeconds] =
 useState(totalSeconds);
+
 
 
 const [running,setRunning] =
@@ -36,14 +49,18 @@ useState(false);
 
 
 
+
+
+
 useEffect(()=>{
 
 
-if(!running || seconds <=0){
+if(!running || seconds <= 0){
 
 return;
 
 }
+
 
 
 const timer =
@@ -57,7 +74,9 @@ setSeconds(prev=>prev-1);
 
 
 
+
 return ()=>clearInterval(timer);
+
 
 
 },[running,seconds]);
@@ -65,10 +84,16 @@ return ()=>clearInterval(timer);
 
 
 
+
+
+
+
 useEffect(()=>{
 
 
-if(seconds===0){
+if(seconds === 0){
+
+setRunning(false);
 
 onComplete();
 
@@ -80,8 +105,29 @@ onComplete();
 
 
 
+
+
+
+function resetTimer(){
+
+
+setSeconds(totalSeconds);
+
+setRunning(false);
+
+
+}
+
+
+
+
+
+
+
+
 const minutes =
-Math.floor(seconds/60);
+Math.floor(seconds / 60);
+
 
 
 const remaining =
@@ -89,9 +135,23 @@ seconds % 60;
 
 
 
+
+
+
+
 return (
 
 <div className="exercise-timer">
+
+
+<span>
+
+⏱ Timer
+
+</span>
+
+
+
 
 
 <strong>
@@ -105,23 +165,76 @@ return (
 
 
 
+
+
+
+
+<div className="exercise-timer-controls">
+
+
+
 <button
 
-onClick={()=>
-setRunning(!running)
-}
+onClick={()=>setRunning(!running)}
 
 >
 
 {
+
 running
+
 ?
-"Pause"
+
+<>
+
+<Pause size={18}/>
+
+Pause
+
+</>
+
 :
-"Start Timer"
+
+<>
+
+<Play size={18}/>
+
+Start
+
+</>
+
 }
 
+
 </button>
+
+
+
+
+
+
+
+<button
+
+onClick={resetTimer}
+
+>
+
+<RotateCcw size={18}/>
+
+Reset
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+
 
 
 

@@ -13,13 +13,13 @@ type Props = {
 
   completedSets:string[];
 
-  toggleSet:(id:string)=>void;
-
   completeExercise:()=>void;
 
   performance:any[];
 
   setPerformance:(value:any)=>void;
+
+  setRestTimer:(value:number)=>void;
 
 };
 
@@ -34,13 +34,13 @@ exercise,
 
 completedSets,
 
-toggleSet,
-
 completeExercise,
 
 performance,
 
-setPerformance
+setPerformance,
+
+setRestTimer
 
 }:Props) {
 
@@ -59,6 +59,9 @@ item=>item.startsWith(exercise.id)
 ).length >= exercise.sets;
 
 
+
+
+
 return (
 
 <section
@@ -73,9 +76,15 @@ exercise.category?.toLowerCase()
 >
 
 
+
+
+
 <p>
 CURRENT
 </p>
+
+
+
 
 
 {
@@ -88,7 +97,10 @@ finished && (
 </p>
 
 )
+
 }
+
+
 
 
 
@@ -98,6 +110,9 @@ finished && (
 <h2>
 {exercise.name}
 </h2>
+
+
+
 
 
 
@@ -113,11 +128,17 @@ exerciseId={exercise.id}
 
 
 
+
+
+
 <ProgressionSuggestion
 
 exercise={exercise}
 
 />
+
+
+
 
 
 
@@ -143,16 +164,28 @@ onComplete={completeExercise}
 
 
 
+
+
+
+
+
 {
 exercise.reps && (
 
 <h3>
+
 {exercise.sets} × {exercise.reps}
+
 </h3>
 
 )
 
 }
+
+
+
+
+
 
 
 
@@ -177,6 +210,11 @@ Equipment:
 
 
 
+
+
+
+
+
 {
 exercise.notes && (
 
@@ -198,6 +236,11 @@ Notes:
 
 
 
+
+
+
+
+
 {
 exercise.superset && (
 
@@ -215,10 +258,12 @@ Superset {exercise.superset}
 
 
 
+
+
+
+
 {
 !exercise.duration && (
-
-<>
 
 <SetInput
 
@@ -228,20 +273,23 @@ sets={exercise.sets}
 
 tracking={exercise.tracking ?? "none"}
 
+rest={exercise.rest ?? 60}
+
 performance={performance}
 
 setPerformance={setPerformance}
 
+setRestTimer={setRestTimer}
+
 />
-
-
-
-
-</>
 
 )
 
 }
+
+
+
+
 
 
 
